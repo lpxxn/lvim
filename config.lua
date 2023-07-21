@@ -39,11 +39,17 @@ lvim.plugins = {
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
        },
-    }
+    },{
+      'phaazon/hop.nvim',
+       branch = 'v2', -- optional but strongly recommended
+       config = function()
+         -- you can configure Hop the way you like here; see :h hop-config
+         require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+       end
+     }
 }
 require("dapui").setup()
 require("symbols-outline").setup()
-
 
 
 -- Read the docs: https://www.lunarvim.org/docs/configuration
@@ -215,6 +221,9 @@ local map = lvim.builtin.which_key.mappings;
 --map({ "n", "<Leader>di", ":lua require('dapui').toggle()<CR>" })
 map["<Leader>di"] = {"<cmd>lua require('dapui').toggle()<cr>", "dapui toggle" }
 map["<Leader>ta"] = {"<cmd>let @+=expand('%:p')<cr>", "current file path" }
+map["<Leader>tr"] = { "<cmd>Telescope lsp_references<cr>", "Telescope references" }
+map["<Leader>ti"] = { "<cmd>Telescope lsp_implementations<cr>", "Telescope references" }
+map["<Leader>tf"] = { "<cmd>HopWord<cr>", "HopWord" }
 
 -- map["<Leader>tv"] = {"<C-w>v", "水平"} --水平新增窗口
 -- map["<Leader>th"] = {"<C-w>s", "垂直"} --垂直新增窗口
@@ -276,4 +285,12 @@ end
 --   }
 --
 --
---
+-- place this in one of your configuration file(s)
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+vim.keymap.set('', 'f', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+end, {remap=true})
+vim.keymap.set('', 'F', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+end, {remap=true})
