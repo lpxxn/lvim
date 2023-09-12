@@ -1,7 +1,8 @@
 lvim.plugins = {
   {"mfussenegger/nvim-dap"},
-  { "rcarriga/nvim-dap-ui"},
+  {"rcarriga/nvim-dap-ui"},
   {"github/copilot.vim"},
+  {"ryanoasis/vim-devicons"},
   {"simrat39/symbols-outline.nvim"},
   {
       "vim-test/vim-test",
@@ -55,5 +56,11 @@ lvim.plugins = {
     { -- tree with undo history
       "mbbill/undotree",
       cmd = "UndotreeToggle",
+    },
+    {
+      "folke/tokyonight.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
     },
 }
